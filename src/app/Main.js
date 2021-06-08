@@ -17,11 +17,21 @@ const Main = () => {
                 (result) => {
                     setIsLoaded(true);
                     let grouped = groupByArray(result, 'project');
-                    setItems(grouped);
 
                     grouped.forEach(element => {
                         element.values = groupByArray(element.values, 'course')
                     });
+                    grouped.forEach(element=>{
+                        element.values.forEach(item =>{
+                            for (let index = 0; index < item.values.length; index++) {
+                                const element = item.values[index];
+                                item.values[0].openedLessonsCount = item.values[0].openedLessonsCount + element.openedLessonsCount;
+                                item.values[0].openedLessonsCount = item.values[0].completedLessonsCount + element.completedLessonsCount;
+                                
+                            }
+                            item.values.splice(1, item.values.length)
+                        })
+                    })
                     setItems(grouped);
                     console.log(grouped);
                 },
@@ -32,11 +42,6 @@ const Main = () => {
             )
 
     }, [])
-    
-
-    const change = () => {
-
-    }
     function groupBy(objectArray, property) {
         return objectArray.reduce(function (acc, obj) {
             var key = obj[property];
@@ -67,7 +72,6 @@ const Main = () => {
 
     return (
         <main className="main">
-            <button onClick={change}>filtr</button>
             <div className="itemsContener">
                 {items.map(item =>
                     <Item.Group>

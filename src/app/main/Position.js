@@ -1,29 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Item } from 'semantic-ui-react';
 import "./Position.css";
+import { Header } from 'semantic-ui-react';
+import { Button, Icon, Label } from 'semantic-ui-react'
 
 
 const Position = (props) => {
-    const picture = "https://picsum.photos/id/870/100/100?grayscale&blur=";
-    const [coursesItems, setCoursesItems] = useState()
-    const [i, seti] = useState(1);
-
-    function groupByArray(xs, key) {
-        return xs.reduce(function (rv, x) {
-            let v = key instanceof Function ? key(x) : x[key];
-            let el = rv.find((r) => r && r.key === v);
-            if (el) {
-                el.values.push(x);
-            }
-            else {
-                rv.push({
-                    key: v,
-                    values: [x]
-                });
-            }
-            return rv;
-        }, []);
-    }
     useEffect(() => {
     }, [])
 
@@ -33,35 +15,45 @@ const Position = (props) => {
                 <Item.Content>
                     <Item.Meta>
                         <div className="itemHeader">
-                            <h3>
-                                <Item.Image size='tiny' src={picture} />
-                                Project: <b>{props.item.key}</b>
-                            </h3>
+                            <h2 class="ui header">
+
+                                <div className="content">
+                                    <Header content={props.item.key} image={<Icon name='file alternate outline' size='large' color="green"></Icon>} />
+                                </div>
+                            </h2>
+
                         </div>
                         <div>
-                        
-                            {props.item.values.map((key) =>
-                                <div>
-                                    <p>Course: <b>{key.course}</b></p>
-                                    <div>completed lessons count: {key.completedLessonsCount}</div>
-                                    <div>opened lessons count: {key.openedLessonsCount}</div>
+                            {props.item.values.map(pos =>
+                                <div className="itemMeta">
+                                    <div className="curse">
+                                        <p>Course: <b>{pos.values[0].course}</b></p>
+                                    </div>
+                                    <a>
+                                        <Button as='div' labelPosition='right'>
+                                            <Button color='twitter'>
+                                                <Icon name='plus' />
+                                    completed lessons count:
+                                    </Button>
+                                            <Label as='a' basic color='green' pointing='left'>
+                                                {pos.values[0].completedLessonsCount}
+                                            </Label>
+                                        </Button>
+                                    </a>
+                                    <a>
+                                        <Button as='div' labelPosition='right'>
+                                            <Button color='instagram'>
+                                                <Icon name='pin' />
+                                            opened lessons count
+                                    </Button>
+                                            <Label as='a' basic color='green' pointing='left'>
+                                                {pos.values[0].openedLessonsCount}
+                                            </Label>
+                                        </Button>
+                                    </a>
+
                                 </div>)}
                         </div>
-                        {/* {props.item.map(project => */}
-                        {/* {project.value.map(item => 
-                            <div>{item.course}</div>
-                            )} */}
-                        {/* <div className="itemMeta">  
-                                <p><b>Course:<br></br> {project.values}</b></p>
-                                <div className="lessonsConteiner">
-                                    <div>
-                                        Opened lessons: {project.values}
-                                    </div>
-                                    <div>
-                                        Completed lessons: {project.values}
-                                    </div>
-                                </div>
-                            </div> */}
                     </Item.Meta>
                     <Item.Extra>
                         <div></div></Item.Extra>
