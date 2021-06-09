@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Position from './main/Position';
 import './style/Main.css';
 import { Item } from 'semantic-ui-react';
+import { Loader } from 'semantic-ui-react';
 
 
 const Main = () => {
@@ -21,13 +22,13 @@ const Main = () => {
                     grouped.forEach(element => {
                         element.values = groupByArray(element.values, 'course')
                     });
-                    grouped.forEach(element=>{
-                        element.values.forEach(item =>{
+                    grouped.forEach(element => {
+                        element.values.forEach(item => {
                             for (let index = 0; index < item.values.length; index++) {
                                 const element = item.values[index];
                                 item.values[0].openedLessonsCount = item.values[0].openedLessonsCount + element.openedLessonsCount;
                                 item.values[0].openedLessonsCount = item.values[0].completedLessonsCount + element.completedLessonsCount;
-                                
+
                             }
                             item.values.splice(1, item.values.length)
                         })
@@ -68,18 +69,24 @@ const Main = () => {
             return rv;
         }, []);
     }
-    
 
     return (
         <main className="main">
+            
+             {(items.length < 1) ? 
+             <div className="loader">
+                 <Loader active inline='centered' size='huge'/>
+                 LOADING...
+             </div>: 
             <div className="itemsContener">
+                <h1>Statistics </h1>
                 {items.map(item =>
                     <Item.Group>
                         <Position item={item} />
                     </Item.Group>
                 )}
             </div>
-
+            }
         </main>
     );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Item } from 'semantic-ui-react';
-import "./Position.css";
+import "./style/Position.css";
 import { Header } from 'semantic-ui-react';
 import { Button, Icon, Label } from 'semantic-ui-react'
 

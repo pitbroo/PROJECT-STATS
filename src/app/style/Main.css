@@ -13,3 +13,13 @@
     margin-right: auto;
     margin-bottom: 50px;
 }
+.loader{
+    margin: 300px;
+    text-align: center;
+}
+.itemsContener h1{
+    color: darkgreen;
+    font-size: xx-large;
+    margin-top: 15px;
+    margin-bottom: 50px;
+}
